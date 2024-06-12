@@ -2,9 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:json_demo/network_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+late SharedPreferences prefs;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  prefs = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -41,16 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    // getDataFormSp();
-  }
-
-  void getDataFormSp() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     String cl = prefs.getString("cl") ?? "";
 
     Map<String, dynamic> jsonData = jsonDecode(cl);
     sList = jsonData["contact_list"] ?? [];
-    setState(() {});
+    // setState(() {});
   }
 
   @override
@@ -59,6 +59,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NetworkUser(),
+                    ));
+              },
+              icon: Icon(Icons.person))
+        ],
       ),
       body: Column(
         children: [
@@ -106,11 +117,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async{
+        onPressed: () async {
           // String data =
           //     '{"contact_list":[{"name":"jaybeer","mobile_number":464647687},{"name":"veer","mobile_number":464647687},{"name":"harsh","mobile_number":47978},{"name":"baby","mobile_number":455456464}]}';
 
-          String data=await rootBundle.loadString("assets/contact.json");
+          String data = await rootBundle.loadString("assets/contact.json");
           print("data $data");
 
           Map<String, dynamic> jsonData = jsonDecode(data);
