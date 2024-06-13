@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:json_demo/movies_list.dart';
 import 'package:json_demo/network_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -68,7 +69,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) => NetworkUser(),
                     ));
               },
-              icon: Icon(Icons.person))
+              icon: Icon(Icons.person)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MoviesList(),
+                    ));
+              },
+              icon: Icon(Icons.movie))
         ],
       ),
       body: Column(

@@ -28,5 +28,12 @@ class ApiHelper{
     print("Api Response  => ${res.statusCode}");
     return res;
   }
+  Future<Response> getApiMovieData(String movieName)async {
+
+    print("Api Calling  => $baseUrl");
+    Response res = await get(Uri.parse("http://www.omdbapi.com/?apikey=c1729c9&s=$movieName"));
+    print("Api Response  => ${res.statusCode}");
+    return res;
+  }
 
 }
