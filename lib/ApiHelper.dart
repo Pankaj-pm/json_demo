@@ -28,11 +28,19 @@ class ApiHelper{
     print("Api Response  => ${res.statusCode}");
     return res;
   }
+
+
   Future<Response> getApiMovieData(String movieName)async {
 
     print("Api Calling  => $baseUrl");
     Response res = await get(Uri.parse("http://www.omdbapi.com/?apikey=c1729c9&s=$movieName"));
     print("Api Response  => ${res.statusCode}");
+    return res;
+  }
+
+  Future<Response> getPixabayImage(String category,String imageType)async{
+    print("category $category imageType $imageType");
+    Response res=await get(Uri.parse("https://pixabay.com/api/?key=42123171-51231a30c65e62f23fa607de4&category=$category&image_type=$imageType&per_page=18"));
     return res;
   }
 

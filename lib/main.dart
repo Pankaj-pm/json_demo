@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_demo/movies_list.dart';
 import 'package:json_demo/network_user.dart';
+import 'package:json_demo/pixabay_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences prefs;
@@ -78,7 +79,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) => MoviesList(),
                     ));
               },
-              icon: Icon(Icons.movie))
+              icon: Icon(Icons.movie)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PixabayApi(),
+                    ));
+              },
+              icon: Icon(Icons.photo))
         ],
       ),
       body: Column(
