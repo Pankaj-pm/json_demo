@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_demo/movies_list.dart';
 import 'package:json_demo/network_user.dart';
+import 'package:json_demo/pixa_api.dart';
 import 'package:json_demo/pixabay_api.dart';
+
+import 'package:json_demo/todo_api_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences prefs;
@@ -13,7 +16,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
   runApp(const MyApp());
+
+
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -49,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     String cl = prefs.getString("cl") ?? "";
-
     Map<String, dynamic> jsonData = jsonDecode(cl);
     sList = jsonData["contact_list"] ?? [];
     // setState(() {});
@@ -88,7 +93,33 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) => PixabayApi(),
                     ));
               },
-              icon: Icon(Icons.photo))
+              icon: Icon(Icons.photo)),
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  child: Text("TODO Api"),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return ToDoApiTest();
+                      },
+                    ));
+                  },
+                ),
+                PopupMenuItem(
+                  child: Text("Pixa Api"),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return PixaApi();
+                      },
+                    ));
+                  },
+                ),
+              ];
+            },
+          )
         ],
       ),
       body: Column(
