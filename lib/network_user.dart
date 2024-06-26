@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:json_demo/ApiHelper.dart';
 import 'package:json_demo/UserModel.dart';
-import 'package:json_demo/student.dart';
 import 'package:json_demo/user.dart';
 
 class NetworkUser extends StatefulWidget {
